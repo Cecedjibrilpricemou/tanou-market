@@ -41,9 +41,11 @@ function decrementerArticle() {
     <div class="panier">
       <button @click="ajouterArticle">+ Ajouter un article</button>
       <button @click="decrementerArticle">- Retirer un article</button>
-      <span class="badge">🛍️ {{ nombreArticles }} article(s)</span>
+
+      <span v-if="panierVide" class="badge">Panier vide</span>
+      <span v-else class="badge">🛍️ {{ nombreArticles }} article(s)</span>
+
       <span class="total">{{ totalPanier }} GNF</span>
-      <span>{{ panierVide }}</span>
     </div>
   </header>
 </template>
