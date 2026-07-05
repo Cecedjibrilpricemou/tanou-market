@@ -12,11 +12,21 @@ const prixUnitaire = ref(25000)
 // --- Valeurs dérivées ---
 // le total, dérivé des deux refs (se recalcule automatiquement)
 const totalPanier = computed(() => nombreArticles.value * prixUnitaire.value)
+// le panier est vide si le nombre d'articles est égal à zéro
+const panierVide = computed(() => nombreArticles.value === 0)
 
 // --- Fonctions ---
 // ajoute un article au panier
 function ajouterArticle() {
   nombreArticles.value++
+}
+// fonction pour retirer un article du panier
+function decrementerArticle() {
+  if (nombreArticles.value > 0) {
+    nombreArticles.value--
+  } else {
+    alert('Le panier est déjà vide !')
+  }
 }
 </script>
 
@@ -30,8 +40,10 @@ function ajouterArticle() {
 
     <div class="panier">
       <button @click="ajouterArticle">+ Ajouter un article</button>
+      <button @click="decrementerArticle">- Retirer un article</button>
       <span class="badge">🛍️ {{ nombreArticles }} article(s)</span>
       <span class="total">{{ totalPanier }} GNF</span>
+      <span>{{ panierVide }}</span>
     </div>
   </header>
 </template>
